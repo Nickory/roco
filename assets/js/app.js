@@ -1,128 +1,146 @@
 const questions = [
   {
-    title: '在洛克王国组队打 BOSS 时，你更像哪种队友？',
+    title: '周末你终于空下来，最想怎么过？',
     options: [
-      { text: '冲在前面先开团', desc: '先把节奏拉起来。', delta: { fire: 2, free: 1 } },
-      { text: '观察机制再出手', desc: '先看局势再进场。', delta: { brain: 2, light: 1 } },
-      { text: '稳定补位保护全队', desc: '不抢镜但很关键。', delta: { light: 2, brain: 1 } },
-      { text: '灵活游走找机会', desc: '我更擅长打变化。', delta: { free: 2, fire: 1 } }
+      { text: '直接出门，想到哪玩到哪', desc: '自由感最重要。', delta: { free: 3 } },
+      { text: '把计划列好，按节奏完成', desc: '有安排才踏实。', delta: { brain: 2, light: 1 } },
+      { text: '约朋友一起，边聊边玩', desc: '在关系里充电。', delta: { light: 2, free: 1 } },
+      { text: '刷一件一直想突破的事', desc: '进步让我兴奋。', delta: { fire: 2, brain: 1 } }
     ]
   },
   {
-    title: '现实里遇到临时加急任务，你会？',
+    title: '组队打洛克王国世界 BOSS 时，你通常先做什么？',
     options: [
-      { text: '马上动手，先推进一版', desc: '先跑起来最重要。', delta: { fire: 2, free: 1 } },
-      { text: '先分解步骤再执行', desc: '我喜欢可控节奏。', delta: { brain: 2, light: 1 } },
-      { text: '先协调资源再开工', desc: '合作效率更高。', delta: { light: 2, free: 1 } },
-      { text: '先判断值不值得做', desc: '方向比速度更重要。', delta: { brain: 2, fire: 1 } }
+      { text: '先看机制和抗性', desc: '先理解规则再出手。', delta: { brain: 3 } },
+      { text: '先把队伍状态稳住', desc: '不翻车优先。', delta: { light: 2, brain: 1 } },
+      { text: '先抢节奏压血线', desc: '开局优势很关键。', delta: { fire: 2, free: 1 } },
+      { text: '随机应变找窗口', desc: '看现场变化操作。', delta: { free: 2, fire: 1 } }
     ]
   },
   {
-    title: '你最想拥有哪种精灵特性？',
+    title: '现实中突发加急任务，你会？',
     options: [
-      { text: '高爆发，一击定胜负', desc: '关键时刻一锤定音。', delta: { fire: 3 } },
-      { text: '高续航，越打越稳', desc: '稳住就能赢。', delta: { light: 3 } },
-      { text: '高机动，节奏难预测', desc: '变化就是优势。', delta: { free: 3 } },
-      { text: '高策略，抓机制反打', desc: '脑子比手更快。', delta: { brain: 3 } }
+      { text: '先做能交付的最小版本', desc: '先推进，后优化。', delta: { fire: 2, brain: 1 } },
+      { text: '先拆优先级，稳步执行', desc: '清楚比匆忙重要。', delta: { brain: 2, light: 1 } },
+      { text: '先协调资源，拉齐预期', desc: '先把人和信息连起来。', delta: { light: 2, free: 1 } },
+      { text: '先试不同路径找捷径', desc: '我习惯边试边定方案。', delta: { free: 2, brain: 1 } }
     ]
   },
   {
-    title: '朋友眼里的你，更接近哪句？',
+    title: '你更像哪种训练师风格？',
     options: [
-      { text: '和你在一起不无聊', desc: '气氛担当。', delta: { free: 2, fire: 1 } },
-      { text: '有你在就很安心', desc: '稳定担当。', delta: { light: 2, brain: 1 } },
-      { text: '你总能想到新办法', desc: '脑洞担当。', delta: { brain: 2, free: 1 } },
-      { text: '你是真能把事做成', desc: '执行担当。', delta: { fire: 2, light: 1 } }
+      { text: '速攻压制型', desc: '抢先手就有主动权。', delta: { fire: 3 } },
+      { text: '控制反打型', desc: '看准节奏再收网。', delta: { brain: 2, light: 1 } },
+      { text: '续航协作型', desc: '团队稳定性第一。', delta: { light: 3 } },
+      { text: '奇招变化型', desc: '不按套路打最有趣。', delta: { free: 3 } }
     ]
   },
   {
-    title: '你更喜欢哪类游戏关卡？',
+    title: '朋友通常怎么评价你？',
     options: [
-      { text: '正面硬刚的战斗关', desc: '爽快最重要。', delta: { fire: 2, free: 1 } },
-      { text: '解谜和机制关', desc: '想清楚再动。', delta: { brain: 2, light: 1 } },
-      { text: '多人协作关', desc: '配合更有成就感。', delta: { light: 2, free: 1 } },
-      { text: '自由探索地图关', desc: '探索本身就很快乐。', delta: { free: 2, brain: 1 } }
+      { text: '你很有执行力', desc: '说做就做。', delta: { fire: 2, light: 1 } },
+      { text: '你很有分寸感', desc: '让人安心。', delta: { light: 2, brain: 1 } },
+      { text: '你点子很多', desc: '总有新想法。', delta: { brain: 2, free: 1 } },
+      { text: '你很有趣很好玩', desc: '气氛总能带起来。', delta: { free: 2, fire: 1 } }
     ]
   },
   {
-    title: '在生活里你最怕哪种状态？',
+    title: '在学校/工作合作里，你更常扮演？',
     options: [
-      { text: '一成不变，毫无变化', desc: '需要新鲜感。', delta: { free: 2, brain: 1 } },
-      { text: '混乱失控，没有秩序', desc: '秩序能让我安心。', delta: { light: 2, brain: 1 } },
-      { text: '拖太久，事情不推进', desc: '行动速度很重要。', delta: { fire: 2, free: 1 } },
-      { text: '思路乱，无法判断方向', desc: '逻辑清晰最关键。', delta: { brain: 2, light: 1 } }
+      { text: '推进者', desc: '盯目标和截止时间。', delta: { fire: 2, brain: 1 } },
+      { text: '协调者', desc: '把大家接在一起。', delta: { light: 2, free: 1 } },
+      { text: '策略者', desc: '先搭结构，再落地。', delta: { brain: 3 } },
+      { text: '探索者', desc: '常能找到新路子。', delta: { free: 3 } }
     ]
   },
   {
-    title: '如果你在王国里带一队精灵，你会怎么配？',
+    title: '遇到不确定的选择时，你倾向？',
     options: [
-      { text: '全员进攻，抢节奏', desc: '快节奏压制。', delta: { fire: 2, free: 1 } },
-      { text: '攻守平衡，稳扎稳打', desc: '容错率更高。', delta: { light: 2, brain: 1 } },
-      { text: '克制链拉满，针对对手', desc: '策略克制。', delta: { brain: 2, fire: 1 } },
-      { text: '高机动阵容，打游击', desc: '灵活变阵。', delta: { free: 2, brain: 1 } }
+      { text: '搜集信息后再决定', desc: '证据足够再行动。', delta: { brain: 2, light: 1 } },
+      { text: '先选一个方向快速试', desc: '实践会给答案。', delta: { fire: 2, free: 1 } },
+      { text: '和信任的人讨论', desc: '外部视角很关键。', delta: { light: 2, brain: 1 } },
+      { text: '凭直觉与兴趣先走', desc: '感觉对了就行。', delta: { free: 2, fire: 1 } }
     ]
   },
   {
-    title: '你更想成为哪种“主角感”？',
+    title: '在王国资源有限时，你优先强化哪类精灵？',
     options: [
-      { text: '热血型，冲锋在前', desc: '燃起来就赢一半。', delta: { fire: 3 } },
-      { text: '守护型，稳住全场', desc: '稳定才是底盘。', delta: { light: 3 } },
-      { text: '智谋型，算无遗策', desc: '脑子就是武器。', delta: { brain: 3 } },
-      { text: '自由型，风格鲜明', desc: '做自己最重要。', delta: { free: 3 } }
-    ]
-  },
-  {
-    title: '当你和朋友意见不同时，你通常会？',
-    options: [
-      { text: '先听，再说我的观点', desc: '先理解再表达。', delta: { light: 2, brain: 1 } },
-      { text: '直接辩清楚，快点定结论', desc: '效率优先。', delta: { fire: 2, brain: 1 } },
-      { text: '找折中方案，一起推进', desc: '协作优先。', delta: { free: 2, light: 1 } },
-      { text: '我会改计划，不硬碰', desc: '灵活处理。', delta: { free: 2, brain: 1 } }
-    ]
-  },
-  {
-    title: '你做长期目标时，最依赖什么？',
-    options: [
-      { text: '强执行，把计划做完', desc: '做完比想完重要。', delta: { fire: 2, light: 1 } },
-      { text: '节奏感，每天稳定推进', desc: '持续是关键。', delta: { light: 2, brain: 1 } },
-      { text: '复盘能力，不断调策略', desc: '越做越聪明。', delta: { brain: 2, fire: 1 } },
-      { text: '兴趣驱动，保持热爱', desc: '热爱能带来持久力。', delta: { free: 2, light: 1 } }
-    ]
-  },
-  {
-    title: '在王国冒险里，你会把资源优先给谁？',
-    options: [
-      { text: '主力输出精灵', desc: '先拉高上限。', delta: { fire: 2, free: 1 } },
-      { text: '核心辅助精灵', desc: '稳态最重要。', delta: { light: 2, brain: 1 } },
-      { text: '功能型战术精灵', desc: '克制链是关键。', delta: { brain: 2, fire: 1 } },
-      { text: '颜值和手感最喜欢的精灵', desc: '快乐优先。', delta: { free: 2, light: 1 } }
-    ]
-  },
-  {
-    title: '你更像哪种社交状态？',
-    options: [
-      { text: '主动开话题，带热场子', desc: '外向表达。', delta: { free: 2, fire: 1 } },
-      { text: '不高频说话，但句句有用', desc: '克制表达。', delta: { brain: 2, light: 1 } },
-      { text: '观察场面，给别人台阶', desc: '温和协调。', delta: { light: 2, free: 1 } },
-      { text: '看状态切换不同模式', desc: '情境适配。', delta: { free: 2, brain: 1 } }
+      { text: '主 C 输出', desc: '先把上限拉起来。', delta: { fire: 3 } },
+      { text: '核心辅助', desc: '团队稳定才走得远。', delta: { light: 3 } },
+      { text: '战术功能位', desc: '针对性决定胜负。', delta: { brain: 3 } },
+      { text: '手感/风格最对味的', desc: '快乐和风格优先。', delta: { free: 3 } }
     ]
   },
   {
     title: '你最理想的生活节奏是？',
     options: [
-      { text: '高能快节奏，机会不断', desc: '刺激感很重要。', delta: { fire: 2, free: 1 } },
-      { text: '稳定高质量，张弛有度', desc: '稳稳向上。', delta: { light: 2, brain: 1 } },
-      { text: '不断学习，持续升级', desc: '成长驱动。', delta: { brain: 2, fire: 1 } },
-      { text: '自由探索，边走边玩', desc: '体验驱动。', delta: { free: 2, light: 1 } }
+      { text: '高能冲刺型', desc: '节奏快，反馈快。', delta: { fire: 2, free: 1 } },
+      { text: '稳定积累型', desc: '每天前进一点点。', delta: { light: 2, brain: 1 } },
+      { text: '学习升级型', desc: '持续迭代最有安全感。', delta: { brain: 2, fire: 1 } },
+      { text: '自由探索型', desc: '灵感和体验更重要。', delta: { free: 2, light: 1 } }
     ]
   },
   {
-    title: '最后一题：如果你要给自己选一个称号，会是？',
+    title: '碰到队友失误导致翻车时，你第一反应是？',
     options: [
-      { text: '破局者', desc: '遇事先开路。', delta: { fire: 2, brain: 1 } },
-      { text: '守望者', desc: '稳住人与局。', delta: { light: 2, fire: 1 } },
-      { text: '策士', desc: '思路是我的核心武器。', delta: { brain: 3 } },
-      { text: '旅者', desc: '自由和变化让我更强。', delta: { free: 3 } }
+      { text: '先救场，后复盘', desc: '先把局面稳下来。', delta: { fire: 2, light: 1 } },
+      { text: '快速复盘找关键错误', desc: '避免下次再犯。', delta: { brain: 2, fire: 1 } },
+      { text: '安抚队友情绪再开下一把', desc: '心态稳定最重要。', delta: { light: 3 } },
+      { text: '换打法试新套路', desc: '别在原路上反复撞墙。', delta: { free: 2, brain: 1 } }
+    ]
+  },
+  {
+    title: '你通常如何做长期目标？',
+    options: [
+      { text: '定强目标，硬推进', desc: '不留退路更高效。', delta: { fire: 2, brain: 1 } },
+      { text: '分阶段计划，稳定执行', desc: '可持续最重要。', delta: { light: 2, brain: 1 } },
+      { text: '固定复盘，不断优化方法', desc: '策略升级带来跃迁。', delta: { brain: 3 } },
+      { text: '以兴趣驱动，保持热情', desc: '热爱才能跑得久。', delta: { free: 2, light: 1 } }
+    ]
+  },
+  {
+    title: '在社交场合，你更接近？',
+    options: [
+      { text: '主动发起，快速热场', desc: '气氛先起来。', delta: { free: 2, fire: 1 } },
+      { text: '安静观察，关键时发言', desc: '质量比数量重要。', delta: { brain: 2, light: 1 } },
+      { text: '照顾全场，避免冷场', desc: '让每个人都舒服。', delta: { light: 2, free: 1 } },
+      { text: '看人切换模式', desc: '适配比固定更有效。', delta: { free: 2, brain: 1 } }
+    ]
+  },
+  {
+    title: '如果王国开新地图，你最想先做？',
+    options: [
+      { text: '冲首通/首杀', desc: '先拿成就再说。', delta: { fire: 3 } },
+      { text: '做攻略和地图笔记', desc: '信息优势很关键。', delta: { brain: 3 } },
+      { text: '带朋友一起开荒', desc: '一起玩才好玩。', delta: { light: 3 } },
+      { text: '到处乱逛挖彩蛋', desc: '探索感最有魅力。', delta: { free: 3 } }
+    ]
+  },
+  {
+    title: '面对压力时，你更容易出现哪种状态？',
+    options: [
+      { text: '先干再说，抗压推进', desc: '做事能缓解焦虑。', delta: { fire: 2, light: 1 } },
+      { text: '先整理思路，排除干扰', desc: '清晰能带来掌控感。', delta: { brain: 2, light: 1 } },
+      { text: '先找人聊聊再调整', desc: '情绪和连接都重要。', delta: { light: 2, free: 1 } },
+      { text: '先切换环境找灵感', desc: '换场景更容易重启。', delta: { free: 2, brain: 1 } }
+    ]
+  },
+  {
+    title: '你希望别人记住你的哪一面？',
+    options: [
+      { text: '靠谱，能把事扛住', desc: '稳定是我的名片。', delta: { light: 2, fire: 1 } },
+      { text: '聪明，思路很清晰', desc: '解决问题是我的强项。', delta: { brain: 3 } },
+      { text: '有趣，有个人风格', desc: '独特比标准更重要。', delta: { free: 2, fire: 1 } },
+      { text: '果断，关键时敢拍板', desc: '我愿意承担决策压力。', delta: { fire: 2, brain: 1 } }
+    ]
+  },
+  {
+    title: '最后一题：如果你给自己起一个王国称号，你会选？',
+    options: [
+      { text: '破局者', desc: '在关键局面打开通路。', delta: { fire: 2, brain: 1 } },
+      { text: '守望者', desc: '稳住团队与关系。', delta: { light: 3 } },
+      { text: '策士', desc: '用判断与策略赢下局面。', delta: { brain: 2, light: 1 } },
+      { text: '旅者', desc: '用探索与变化定义自己。', delta: { free: 3 } }
     ]
   }
 ];
@@ -662,8 +680,11 @@ function recomputeScoresFromAnswers() {
     const option = questions[qIdx]?.options?.[ansIdx];
     if (!option) return;
     Object.keys(option.delta).forEach(key => {
-      next[key] = clamp(next[key] + option.delta[key] * 4);
+      next[key] = clamp(next[key] + option.delta[key] * 2);
     });
+  });
+  Object.keys(next).forEach(key => {
+    next[key] = Math.round(next[key]);
   });
   state.scores = next;
 }
@@ -743,9 +764,13 @@ function detectHiddenSeries() {
 
 function computeSpiritScore(spirit, target, hiddenSeries) {
   const d = distance(target, spirit.weights);
-  const popularityBoost = spirit.popularity * 0.14 + (spirit.is_hot ? 5.5 : 0);
+  const targetCode = makeTypeCode(target);
+  const spiritCode = makeTypeCode(spirit.weights);
+  const codeMatchCount = [...targetCode].reduce((sum, c, i) => sum + (c === spiritCode[i] ? 1 : 0), 0);
+  const popularityBoost = spirit.popularity * 0.05 + (spirit.is_hot ? 1.2 : 0);
+  const codeBoost = codeMatchCount * 1.8;
   const hiddenPenalty = !hiddenSeries && spirit.is_hidden ? 10 : 0;
-  return d - popularityBoost + hiddenPenalty;
+  return d - popularityBoost - codeBoost + hiddenPenalty;
 }
 
 function computeResult() {
@@ -763,7 +788,11 @@ function computeResult() {
     .map(spirit => ({
       spirit,
       score: computeSpiritScore(spirit, state.scores, hiddenSeries),
-      rawDistance: distance(state.scores, spirit.weights)
+      rawDistance: distance(state.scores, spirit.weights),
+      codeMatchCount: [...makeTypeCode(state.scores)].reduce(
+        (sum, c, i) => sum + (c === makeTypeCode(spirit.weights)[i] ? 1 : 0),
+        0
+      )
     }))
     .sort((a, b) => a.score - b.score);
 
@@ -902,7 +931,7 @@ function renderSimilar(similarRows) {
 
 function showResult(topRow, similarRows) {
   const spirit = topRow.spirit;
-  const matchScore = clamp(Math.round(100 - topRow.rawDistance * 1.35 + spirit.popularity * 0.08));
+  const matchScore = clamp(Math.round(100 - topRow.rawDistance * 1.45 + topRow.codeMatchCount * 3));
   const typeCode = makeTypeCode(state.scores);
 
   state.result = spirit;
