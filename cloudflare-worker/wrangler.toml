@@ -1,0 +1,8 @@
+name = "roco-ranking"
+main = "src/worker.js"
+compatibility_date = "2026-04-21"
+
+[[kv_namespaces]]
+binding = "RANKING_KV"
+id = "__SET_PROD_KV_NAMESPACE_ID__"
+preview_id = "__SET_PREVIEW_KV_NAMESPACE_ID__"

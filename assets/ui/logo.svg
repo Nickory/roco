@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="g" x1="72" y1="64" x2="436" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C5CFF"/>
+      <stop offset="1" stop-color="#29D3FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="#11162E"/>
+  <rect x="24" y="24" width="464" height="464" rx="112" stroke="url(#g)" stroke-width="10"/>
+  <circle cx="256" cy="188" r="110" fill="url(#g)" opacity="0.2"/>
+  <path d="M157 338V165h73c63 0 104 32 104 83 0 52-41 90-106 90h-28v57h-43Zm43-92h29c38 0 61-16 61-44 0-27-22-40-60-40h-30v84Z" fill="#FFF6BF"/>
+  <text x="256" y="402" text-anchor="middle" fill="#EDF3FF" font-family="Arial, Microsoft YaHei, sans-serif" font-size="30" letter-spacing="4">ROCO SPIRIT</text>
+</svg>

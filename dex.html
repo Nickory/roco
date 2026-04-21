@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>洛克王国精灵图鉴</title>
+  <meta name="description" content="洛克王国精灵图鉴，支持搜索、筛选和排序。" />
+  <link rel="icon" type="image/png" href="assets/ui/favicon.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <a class="brand" href="index.html">ROCO SPIRIT</a>
+      <div class="top-actions">
+        <span class="pill">精灵图鉴</span>
+        <a class="link-btn" href="index.html">返回测试</a>
+      </div>
+    </header>
+
+    <section class="panel" id="dbSection">
+      <h2>精灵图鉴</h2>
+      <p class="panel-sub">按名字、属性、系列来找你想看的精灵。</p>
+      <div class="tools-row">
+        <div class="search-box">
+          <input class="input" id="dbInput" placeholder="搜索精灵名 / 属性 / 系列" />
+          <button class="btn primary" id="dbSearchBtn">搜索</button>
+        </div>
+        <select class="select" id="dbSort">
+          <option value="hot">推荐顺序</option>
+          <option value="name">按名称排序</option>
+        </select>
+        <button class="btn ghost" id="dbResetBtn">重置</button>
+      </div>
+
+      <div class="filter-row" id="filterRow">
+        <button class="chip active" data-filter="all">全部</button>
+        <button class="chip" data-filter="mainstream">主流系列</button>
+        <button class="chip" data-filter="hidden">隐藏系列</button>
+      </div>
+
+      <div class="db-status" id="dbStatus">图鉴加载中…</div>
+      <div id="dbMount"></div>
+    </section>
+  </main>
+
+  <script src="assets/data/spirits.inline.js"></script>
+  <script src="assets/js/ranking-config.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

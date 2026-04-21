@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>测测你是洛克王国里的哪个精灵</title>
+  <meta name="description" content="测测你是洛克王国里的哪个精灵，12题快速匹配，支持结果分享。" />
+  <link rel="icon" type="image/png" href="assets/ui/favicon.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <a class="brand" href="index.html">ROCO SPIRIT</a>
+      <div class="top-actions">
+        <span class="pill">14 道题 · 3-5 分钟</span>
+        <a class="link-btn" href="dex.html">精灵图鉴</a>
+      </div>
+    </header>
+
+    <section class="hero-scene">
+      <div class="star-layer"></div>
+      <section class="hero-copy-card">
+        <span class="hero-mini">ROCO SPIRIT</span>
+        <h1>测测你是<br/>洛克王国里的<br/>哪个精灵</h1>
+        <p>选出更像你的那一项，看看你的专属精灵结果。</p>
+        <ul>
+          <li>12 道题，节奏很快</li>
+          <li>结果可直接分享给朋友</li>
+          <li>支持查看完整精灵图鉴</li>
+        </ul>
+        <div class="hero-buttons">
+          <button class="btn primary" id="startQuizBtn">开始测试</button>
+          <a class="btn ghost" href="dex.html" id="openGalleryBtn">去看图鉴</a>
+        </div>
+      </section>
+
+      <div class="hero-sprites" aria-hidden="true">
+        <img class="sprite s1" src="assets/spirits_full/spirit_3167.png" alt="" />
+        <img class="sprite s2" src="assets/spirits_full/spirit_3168.png" alt="" />
+        <img class="sprite s3" src="assets/spirits_full/spirit_3174.png" alt="" />
+        <img class="sprite s4" src="assets/spirits_full/spirit_3441.png" alt="" />
+        <img class="sprite s5" src="assets/spirits_full/spirit_3173.png" alt="" />
+        <img class="sprite s6" src="assets/spirits_full/spirit_3318.png" alt="" />
+        <img class="sprite s7" src="assets/spirits_full/spirit_3411.png" alt="" />
+      </div>
+    </section>
+
+    <section class="panel rank-panel">
+      <div class="rank-head">
+        <h2>👑 人气排行</h2>
+        <span class="rank-total" id="totalTestCount">1,684,232 人已测</span>
+      </div>
+      <div id="rankMount"></div>
+    </section>
+
+    <section class="panel quiz-panel" id="quizSection">
+      <div class="quiz-head">
+        <div>
+          <h2>人格测试</h2>
+          <p class="panel-sub">看感觉选就好，没有标准答案。</p>
+        </div>
+        <div class="count-card">当前收录 <strong id="libraryCount">--</strong> 只精灵</div>
+      </div>
+
+      <div class="progress"><span id="progressBar"></span></div>
+      <div id="quizMount"></div>
+
+      <div class="result" id="resultWrap">
+        <div class="result-art" id="resultArt"></div>
+        <div class="result-copy">
+          <div class="result-topline">
+            <div class="result-code" id="resultCode">RESULT</div>
+            <div class="result-series" id="resultSeries">主流系列</div>
+          </div>
+          <h3 id="resultName">——</h3>
+          <p class="desc" id="resultPitch"></p>
+          <div class="type-row" id="resultTypes"></div>
+          <div class="tag-row" id="resultTags"></div>
+          <div class="meta-row">
+            <span id="resultConfidence">匹配度：--</span>
+          </div>
+          <div class="info-list" id="resultInfo"></div>
+          <p class="desc" id="resultSummary"></p>
+          <div class="stat-grid" id="resultStats"></div>
+          <div class="suggest" id="similarMount"></div>
+          <div class="row-actions">
+            <button class="btn primary" id="restartBtn">再测一次</button>
+            <button class="btn" id="shareResultBtn">分享结果</button>
+            <button class="btn ghost" id="openWikiBtn">查看图鉴页</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/data/spirits.inline.js"></script>
+  <script src="assets/js/ranking-config.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
