@@ -669,10 +669,16 @@ function recomputeScoresFromAnswers() {
 }
 
 function renderQuestion() {
-  els.resultWrap.classList.remove('show');
+  if (!els.quizMount) return;
+  if (els.resultWrap) els.resultWrap.classList.remove('show');
   const q = questions[state.index];
+  if (!q || !Array.isArray(q.options) || !q.options.length) {
+    state.index = 0;
+    els.quizMount.innerHTML = '<div class="empty">题目加载异常，请刷新页面后重试。</div>';
+    return;
+  }
   const doneCount = state.answers.filter(v => v !== undefined && v !== null).length;
-  els.progressBar.style.width = `${(doneCount / questions.length) * 100}%`;
+  if (els.progressBar) els.progressBar.style.width = `${(doneCount / questions.length) * 100}%`;
   els.quizMount.innerHTML = `
     <div class="q-badge">第 ${state.index + 1} 题</div>
     <h3 class="question-title">${q.title}</h3>
@@ -708,7 +714,7 @@ function goPrevQuestion() {
 function gotoNextUnansweredOrResult() {
   const nextUnanswered = state.answers.findIndex(v => v === undefined || v === null);
   if (nextUnanswered === -1) {
-    els.progressBar.style.width = '100%';
+    if (els.progressBar) els.progressBar.style.width = '100%';
     computeResult();
     return;
   }
@@ -746,6 +752,12 @@ function computeResult() {
   const hiddenSeries = detectHiddenSeries();
   const pool = hiddenSeries ? state.spirits.filter(s => s.series === hiddenSeries) : state.spirits;
   const activePool = pool.length ? pool : state.spirits;
+  if (!activePool.length) {
+    if (els.quizMount) {
+      els.quizMount.innerHTML = '<div class="empty">精灵素材尚未加载完成，请稍后再试。</div>';
+    }
+    return;
+  }
 
   const ranking = activePool
     .map(spirit => ({
@@ -849,7 +861,7 @@ function getRankRows(limit = 8) {
 }
 
 function renderPopularityRanking() {
-  if (!els.rankMount) return;
+  if (!els.rankMount || !els.totalTestCount) return;
   const rows = getRankRows(8);
   const base = Math.max(state.totalTests || 0, 1);
 
@@ -1221,6 +1233,12 @@ function bindEvents() {
   const startQuizBtn = document.getElementById('startQuizBtn');
   if (startQuizBtn) {
     startQuizBtn.addEventListener('click', () => {
+      if (!els.quizMount) return;
+      if (state.result && els.resultWrap?.classList.contains('show')) {
+        resetQuiz();
+      } else if (!els.quizMount.innerHTML.trim()) {
+        renderQuestion();
+      }
       document.getElementById('quizSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
@@ -1310,7 +1328,7 @@ async function init() {
 
   await loadResultStats();
   bindEvents();
-  if (els.quizMount && els.progressBar) {
+  if (els.quizMount) {
     renderQuestion();
     restoreSharedResult();
     renderPopularityRanking();
