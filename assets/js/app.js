@@ -1101,7 +1101,7 @@ function createShareCardBlob(spirit, matchScore) {
 
   ctx.fillStyle = '#4f755d';
   ctx.font = '700 28px sans-serif';
-  ctx.fillText('ROCO SPIRIT MATCH RESULT', 98, 112);
+  ctx.fillText('ROCO-TI MATCH RESULT', 98, 112);
 
   ctx.fillStyle = '#17191f';
   ctx.font = '700 56px sans-serif';
