@@ -563,6 +563,8 @@ const EXTENDED_SPIRITS = [
 
 const state = {
   spirits: [],
+  spiritsReady: false,
+  pendingResult: false,
   index: 0,
   result: null,
   ranking: [],
@@ -574,6 +576,7 @@ const state = {
 };
 
 const els = {};
+const PROJECT_REPO_URL = 'https://github.com/Nickory/roco';
 const REMOTE_RANKING = {
   statsUrl: window.__RANKING_STATS_URL__ || '',
   hitUrl: window.__RANKING_HIT_URL__ || '',
@@ -778,11 +781,13 @@ function computeResult() {
   const pool = hiddenSeries ? state.spirits.filter(s => s.series === hiddenSeries) : state.spirits;
   const activePool = pool.length ? pool : state.spirits;
   if (!activePool.length) {
+    state.pendingResult = true;
     if (els.quizMount) {
-      els.quizMount.innerHTML = '<div class="empty">精灵素材尚未加载完成，请稍后再试。</div>';
+      els.quizMount.innerHTML = '<div class="empty">正在加载精灵数据，马上为你生成结果…</div>';
     }
     return;
   }
+  state.pendingResult = false;
 
   const ranking = activePool
     .map(spirit => ({
@@ -828,7 +833,7 @@ function buildPlayfulNarrative(spirit) {
 
 function buildShareText(spirit, confidence) {
   const code = makeTypeCode(state.scores);
-  return `我测出来是【${spirit.title}】（${code}）匹配度 ${confidence}%\n${buildShareLink(spirit)}`;
+  return `我测出来是【${spirit.title}】（${code}）匹配度 ${confidence}%\n测试链接：${buildShareLink(spirit)}\n项目主页：${PROJECT_REPO_URL}`;
 }
 
 async function loadResultStats() {
@@ -1125,6 +1130,9 @@ function createShareCardBlob(spirit, matchScore) {
     drawMetric(ctx, 98, 1190, '自由', state.scores.free);
     drawMetric(ctx, 560, 1146, '脑洞', state.scores.brain);
     drawMetric(ctx, 560, 1190, '热血', state.scores.fire);
+    ctx.fillStyle = '#7c859d';
+    ctx.font = '500 18px sans-serif';
+    ctx.fillText('项目地址: github.com/Nickory/roco', 98, 1262);
 
     canvas.toBlob(blob => {
       if (blob) resolve(blob);
@@ -1223,15 +1231,32 @@ function drawMetric(ctx, x, y, label, value) {
   roundRect(ctx, x, y + 10, 3.4 * value, 10, 6, true, false);
 }
 
-async function loadSpiritsData() {
-  try {
-    const fullRes = await fetch('assets/data/spirits.full.json', { cache: 'no-store' });
-    if (fullRes.ok) {
-      return await fullRes.json();
-    }
+async function loadSpiritsData(mode = 'fast') {
+  const loadBase = async () => {
     const baseRes = await fetch('assets/data/spirits.json', { cache: 'no-store' });
-    if (!baseRes.ok) throw new Error(`Failed to load spirits data: ${baseRes.status}`);
+    if (!baseRes.ok) throw new Error(`Failed to load base spirits data: ${baseRes.status}`);
     return await baseRes.json();
+  };
+  const loadFull = async () => {
+    const fullRes = await fetch('assets/data/spirits.full.json', { cache: 'no-store' });
+    if (!fullRes.ok) throw new Error(`Failed to load full spirits data: ${fullRes.status}`);
+    return await fullRes.json();
+  };
+  try {
+    if (mode === 'full') {
+      try {
+        return await loadFull();
+      } catch (err) {
+        console.warn('load full spirits failed, fallback to base:', err);
+        return await loadBase();
+      }
+    }
+    try {
+      return await loadBase();
+    } catch (err) {
+      console.warn('load base spirits failed, fallback to full:', err);
+      return await loadFull();
+    }
   } catch (err) {
     if (Array.isArray(window.__SPIRITS_DATA__) && window.__SPIRITS_DATA__.length > 0) {
       console.warn('fetch spirits.json failed, fallback to bundled data:', err);
@@ -1242,6 +1267,7 @@ async function loadSpiritsData() {
 }
 
 function restoreSharedResult() {
+  if (state.result) return;
   if (!els.resultWrap) return;
   const hash = window.location.hash || '';
   const match = hash.match(/result=([^&]+)/);
@@ -1318,10 +1344,20 @@ function bindEvents() {
   }
 }
 
-async function init() {
-  const rawSpirits = await loadSpiritsData();
+function applySpirits(rawSpirits) {
   state.spirits = expandSpiritLibrary(rawSpirits).filter(item => Boolean(item.image));
+  state.spiritsReady = state.spirits.length > 0;
+  if (els.libraryCount) els.libraryCount.textContent = String(state.spirits.length);
+  if (els.rankMount) renderPopularityRanking();
+  if (els.dbMount) applyFilterAndSearch();
+  restoreSharedResult();
+  if (state.pendingResult && state.spiritsReady) {
+    state.pendingResult = false;
+    computeResult();
+  }
+}
 
+async function init() {
   Object.assign(els, {
     progressBar: document.getElementById('progressBar'),
     quizMount: document.getElementById('quizMount'),
@@ -1351,20 +1387,36 @@ async function init() {
     libraryCount: document.getElementById('libraryCount')
   });
 
-  if (els.libraryCount) {
-    els.libraryCount.textContent = String(state.spirits.length);
-  }
-
-  await loadResultStats();
   bindEvents();
   if (els.quizMount) {
     renderQuestion();
-    restoreSharedResult();
-    renderPopularityRanking();
   }
+
+  loadResultStats().then(() => renderPopularityRanking());
+
   if (els.dbMount) {
-    applyFilterAndSearch();
+    const rawFull = await loadSpiritsData('full');
+    applySpirits(rawFull);
+    return;
   }
+
+  try {
+    const rawFast = await loadSpiritsData('fast');
+    applySpirits(rawFast);
+  } catch (err) {
+    console.warn('load fast spirits failed:', err);
+  }
+
+  loadSpiritsData('full')
+    .then(rawFull => {
+      const nextCount = expandSpiritLibrary(rawFull).filter(item => Boolean(item.image)).length;
+      if (nextCount > state.spirits.length) {
+        applySpirits(rawFull);
+      }
+    })
+    .catch(err => {
+      console.warn('load full spirits in background failed:', err);
+    });
 }
 
 init().catch(err => {
